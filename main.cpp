@@ -1,12 +1,10 @@
 #include <SFML/Graphics.hpp>
 
-#include "test.hpp"
-
 #include "Renderer.hpp"
 
 int main() {
     sf::RenderWindow window(sf::VideoMode(Renderer::WIDTH, Renderer::HEIGHT), 
-                            getTitle());
+                            Renderer::TITLE);
     
     Renderer renderer(window);
 

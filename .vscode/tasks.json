@@ -10,7 +10,6 @@
             "args": [
                 "-c",
                 "main.cpp",
-                "test.cpp",
                 "Renderer.cpp"
             ]
         },
@@ -20,7 +19,6 @@
             "command": "g++",
             "args": [
                 "main.o",
-                "test.o",
                 "Renderer.o",
                 "-o",
                 "sfml-app.out",

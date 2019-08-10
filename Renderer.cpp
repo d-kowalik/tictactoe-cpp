@@ -1,6 +1,6 @@
 #include "Renderer.hpp"
 
-const std::string Renderer::TITLE = "ttt";
+const std::string Renderer::TITLE = "dev";
 
 Renderer::Renderer(sf::RenderWindow& window) 
 : _window(window)
@@ -9,7 +9,7 @@ Renderer::Renderer(sf::RenderWindow& window)
 }
 
 void Renderer::DrawGrid() {
-        sf::Vertex hline[] = 
+    sf::Vertex hline[] = 
     {
         sf::Vertex(sf::Vector2f(0.f, static_cast<float>(HEIGHT)/3.f), sf::Color::Red),
         sf::Vertex(sf::Vector2f(WIDTH, static_cast<float>(HEIGHT)/3.f), sf::Color::Red)
@@ -34,7 +34,7 @@ void Renderer::DrawGrid() {
 }
 
 void Renderer::Render() {
-    _window.clear(sf::Color::White);
+    _window.clear(sf::Color::Black);
     DrawGrid();
     _window.display();
 }
