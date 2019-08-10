@@ -10,7 +10,8 @@
             "args": [
                 "-c",
                 "main.cpp",
-                "test.cpp"
+                "test.cpp",
+                "Renderer.cpp"
             ]
         },
         {
@@ -20,6 +21,7 @@
             "args": [
                 "main.o",
                 "test.o",
+                "Renderer.o",
                 "-o",
                 "sfml-app.out",
                 "-lsfml-graphics",
