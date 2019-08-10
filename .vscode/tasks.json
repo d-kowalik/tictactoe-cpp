@@ -31,8 +31,9 @@
         {
             "label": "run",
             "type": "shell",
-            "command": "./sfml-app",
-            "dependsOn": "build"
+            "command": "./sfml-app.out",
+            "dependsOn": "build",
+            "problemMatcher": []
         }
     ]
 }
