@@ -18,7 +18,7 @@ int main() {
             }
         }
 
-        window.clear();
+        window.clear(sf::Color::White);
         window.draw(shape);
         window.display();
     }
