@@ -1,5 +1,6 @@
 #include "Game.hpp"
 
-Game::Game() {
+Game::Game() : _board{{{EMPTY, EMPTY, EMPTY}, 
+                    {EMPTY, EMPTY, EMPTY}, {EMPTY, EMPTY, EMPTY}}} {
     state = Game::State::RUNNING;
 }
