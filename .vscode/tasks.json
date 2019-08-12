@@ -10,7 +10,8 @@
             "args": [
                 "-c",
                 "main.cpp",
-                "Renderer.cpp"
+                "Renderer.cpp",
+                "Game.cpp"
             ]
         },
         {
@@ -20,6 +21,7 @@
             "args": [
                 "main.o",
                 "Renderer.o",
+                "Game.o",
                 "-o",
                 "sfml-app.out",
                 "-lsfml-graphics",
