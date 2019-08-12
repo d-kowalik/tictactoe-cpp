@@ -8,6 +8,13 @@ Renderer::Renderer(sf::RenderWindow& window)
 
 }
 
+void Renderer::Render() {
+    _window.clear(sf::Color::Black);
+    DrawGrid();
+    DrawX(0, 0);
+    _window.display();
+}
+
 void Renderer::DrawGrid() {
     sf::Vertex hline[] = 
     {
@@ -33,8 +40,23 @@ void Renderer::DrawGrid() {
     _window.draw(vline, 2, sf::Lines);
 }
 
-void Renderer::Render() {
-    _window.clear(sf::Color::Black);
-    DrawGrid();
-    _window.display();
+void Renderer::DrawX(int row, int column) {
+    sf::Vertex line1[] = 
+    {
+        sf::Vertex(sf::Vector2f((row*CELL_WIDTH)+10, 
+                    (column * CELL_HEIGHT)+10), sf::Color::Red),
+        sf::Vertex(sf::Vector2f(((row+1)*CELL_WIDTH)-10, 
+                    ((column+1)*CELL_HEIGHT)-10), sf::Color::Red)
+    };
+
+    sf::Vertex line2[] = 
+    {
+        sf::Vertex(sf::Vector2f(((row+1)*CELL_WIDTH)-10, 
+                    (column * CELL_HEIGHT)+10), sf::Color::Red),
+        sf::Vertex(sf::Vector2f((row*CELL_WIDTH)+10, 
+                    ((column+1)*CELL_HEIGHT)-10), sf::Color::Red)
+    };
+
+    _window.draw(line1, 2, sf::Lines);
+    _window.draw(line2, 2, sf::Lines);
 }
