@@ -12,6 +12,7 @@ void Renderer::Render() {
     _window.clear(sf::Color::Black);
     DrawGrid();
     DrawX(0, 0);
+    DrawO(1, 1);
     _window.display();
 }
 
@@ -43,20 +44,29 @@ void Renderer::DrawGrid() {
 void Renderer::DrawX(int row, int column) {
     sf::Vertex line1[] = 
     {
-        sf::Vertex(sf::Vector2f((row*CELL_WIDTH)+10, 
-                    (column * CELL_HEIGHT)+10), sf::Color::Red),
-        sf::Vertex(sf::Vector2f(((row+1)*CELL_WIDTH)-10, 
-                    ((column+1)*CELL_HEIGHT)-10), sf::Color::Red)
+        sf::Vertex(sf::Vector2f((row*CELL_WIDTH)+80, 
+                    (column * CELL_HEIGHT)+20), sf::Color::Red),
+        sf::Vertex(sf::Vector2f(((row+1)*CELL_WIDTH)-80, 
+                    ((column+1)*CELL_HEIGHT)-20), sf::Color::Red)
     };
 
     sf::Vertex line2[] = 
     {
-        sf::Vertex(sf::Vector2f(((row+1)*CELL_WIDTH)-10, 
-                    (column * CELL_HEIGHT)+10), sf::Color::Red),
-        sf::Vertex(sf::Vector2f((row*CELL_WIDTH)+10, 
-                    ((column+1)*CELL_HEIGHT)-10), sf::Color::Red)
+        sf::Vertex(sf::Vector2f(((row+1)*CELL_WIDTH)-80, 
+                    (column * CELL_HEIGHT)+20), sf::Color::Red),
+        sf::Vertex(sf::Vector2f((row*CELL_WIDTH)+80, 
+                    ((column+1)*CELL_HEIGHT)-20), sf::Color::Red)
     };
 
     _window.draw(line1, 2, sf::Lines);
     _window.draw(line2, 2, sf::Lines);
+}
+
+void Renderer::DrawO(int row, int column) {
+    sf::CircleShape circle((CELL_HEIGHT/2)-10);
+    circle.setPosition((row*CELL_WIDTH)+(CELL_WIDTH/4), (column*CELL_HEIGHT)+10);
+    circle.setOutlineColor(sf::Color::Red);
+    circle.setFillColor(sf::Color::Black);
+    circle.setOutlineThickness(1);
+    _window.draw(circle);
 }

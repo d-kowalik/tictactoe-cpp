@@ -23,4 +23,5 @@ public:
 private:
     void DrawGrid();
     void DrawX(int row, int column);
+    void DrawO(int row, int column);
 };
