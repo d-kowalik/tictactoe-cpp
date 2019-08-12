@@ -9,6 +9,8 @@ int main() {
     
     Renderer renderer(window);
     Game game;
+    game.SetCell(Game::Cell::X, 0, 0);
+    game.SetCell(Game::Cell::O, 1, 2);
 
     while (game.state != Game::State::QUIT) {
         sf::Event event;
@@ -17,7 +19,7 @@ int main() {
                 game.state = Game::State::QUIT;
             }
         }
-        renderer.Render();
+        renderer.Render(game.GetBoard());
     }
 
     window.close();

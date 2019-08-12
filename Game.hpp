@@ -13,7 +13,7 @@ public:
     enum Cell {
         EMPTY=0,
         X=1,
-        Y=2
+        O=2
     };
 
     State state;

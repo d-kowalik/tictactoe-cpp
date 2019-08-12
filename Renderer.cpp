@@ -1,4 +1,5 @@
 #include "Renderer.hpp"
+#include "Game.hpp"
 
 const std::string Renderer::TITLE = "dev";
 
@@ -8,11 +9,18 @@ Renderer::Renderer(sf::RenderWindow& window)
 
 }
 
-void Renderer::Render() {
+void Renderer::Render(std::array<std::array<int, 3>, 3> board) {
     _window.clear(sf::Color::Black);
     DrawGrid();
-    DrawX(0, 0);
-    DrawO(1, 1);
+    for (int i = 0; i < board.size(); i++) {
+        for (int j = 0; j < board[i].size(); j++) {
+            if (board[i][j] == Game::Cell::X) {
+                DrawX(i, j);
+            } else if (board[i][j] == Game::Cell::O) {
+                DrawO(i, j);
+            }
+        }
+    }
     _window.display();
 }
 

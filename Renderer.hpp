@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <array>
 
 #include <SFML/Graphics.hpp>
 
@@ -18,7 +19,7 @@ private:
 public:
     Renderer(sf::RenderWindow& window);
 
-    void Render();
+    void Render(std::array<std::array<int, 3>, 3> board);
 
 private:
     void DrawGrid();
