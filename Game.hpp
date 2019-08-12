@@ -24,5 +24,6 @@ private:
 public:
     Game();
 
-    inline std::array<std::array<int, 3>, 3> GetBoard() { return _board; }
+    inline std::array<std::array<int, 3>, 3> GetBoard() const { return _board; }
+    inline void SetCell(Cell cell, int x, int y) { _board[x][y] = cell; }
 };
