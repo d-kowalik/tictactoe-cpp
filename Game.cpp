@@ -24,6 +24,7 @@ void Game::ClearBoard() {
 }
 
 void Game::SetCell(Cell cell, int x, int y) {
+    if (_board[x][y] != EMPTY) return;
     _board[x][y] = cell;
     moves++;
     CheckWin();
