@@ -20,10 +20,14 @@ public:
 
 private:
     std::array<std::array<int, 3>, 3> _board;
+    Cell player;
 
 public:
     Game();
 
+    void ClickOnCell(int x, int y);
+    void NextTurn();
     inline std::array<std::array<int, 3>, 3> GetBoard() const { return _board; }
     inline void SetCell(Cell cell, int x, int y) { _board[x][y] = cell; }
+    inline Cell GetPlayer() const { return player; }
 };
