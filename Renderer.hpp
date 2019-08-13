@@ -12,6 +12,11 @@ public:
     static constexpr unsigned int HEIGHT = 720;
     static constexpr unsigned int CELL_WIDTH = WIDTH/3;
     static constexpr unsigned int CELL_HEIGHT = HEIGHT/3;
+    sf::Color X_COLOR = sf::Color::Blue;
+    sf::Color O_COLOR = sf::Color::Green;
+    sf::Color TIE_COLOR = sf::Color::Red;
+    sf::Color BACKGROUND_COLOR = sf::Color::White;
+    sf::Color DEFAULT_BOARD_COLOR = sf::Color::Black;
     static const std::string TITLE;
 
 private:

@@ -16,7 +16,7 @@ public:
         O=2
     };
 
-    State state;
+    static State state;
 
 private:
     std::array<std::array<int, 3>, 3> _board;

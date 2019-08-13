@@ -10,7 +10,7 @@ Renderer::Renderer(sf::RenderWindow& window)
 }
 
 void Renderer::Render(std::array<std::array<int, 3>, 3> board) {
-    _window.clear(sf::Color::Black);
+    _window.clear(BACKGROUND_COLOR);
     DrawGrid();
     for (int i = 0; i < board.size(); i++) {
         for (int j = 0; j < board[i].size(); j++) {
@@ -25,16 +25,30 @@ void Renderer::Render(std::array<std::array<int, 3>, 3> board) {
 }
 
 void Renderer::DrawGrid() {
+    sf::Color boardColor = DEFAULT_BOARD_COLOR;
+    switch (Game::state) {
+        case Game::State::O_WON:
+            boardColor = O_COLOR;
+            break;
+        case Game::State::X_WON:
+            boardColor = X_COLOR;
+            break;
+        case Game::State::TIE:
+            boardColor = TIE_COLOR;
+            break;
+        default: {}
+    }
+
     sf::Vertex hline[] = 
     {
-        sf::Vertex(sf::Vector2f(0.f, CELL_HEIGHT), sf::Color::Red),
-        sf::Vertex(sf::Vector2f(WIDTH, CELL_HEIGHT), sf::Color::Red)
+        sf::Vertex(sf::Vector2f(0.f, CELL_HEIGHT), boardColor),
+        sf::Vertex(sf::Vector2f(WIDTH, CELL_HEIGHT), boardColor)
     };
 
     sf::Vertex vline[] = 
     {
-        sf::Vertex(sf::Vector2f(CELL_WIDTH ,0.f), sf::Color::Red),
-        sf::Vertex(sf::Vector2f(CELL_WIDTH, HEIGHT), sf::Color::Red)
+        sf::Vertex(sf::Vector2f(CELL_WIDTH ,0.f), boardColor),
+        sf::Vertex(sf::Vector2f(CELL_WIDTH, HEIGHT), boardColor)
     };
 
     _window.draw(hline, 2, sf::Lines);
@@ -50,20 +64,31 @@ void Renderer::DrawGrid() {
 }
 
 void Renderer::DrawX(int row, int column) {
+    sf::Color xcolor = X_COLOR;
+    switch (Game::state) {
+        case Game::State::O_WON:
+            xcolor = O_COLOR;
+            break;
+        case Game::State::TIE:
+            xcolor = TIE_COLOR;
+            break;
+        default: {}
+    }
+
     sf::Vertex line1[] = 
     {
         sf::Vertex(sf::Vector2f((row*CELL_WIDTH)+80, 
-                    (column * CELL_HEIGHT)+20), sf::Color::Red),
+                    (column * CELL_HEIGHT)+20), xcolor),
         sf::Vertex(sf::Vector2f(((row+1)*CELL_WIDTH)-80, 
-                    ((column+1)*CELL_HEIGHT)-20), sf::Color::Red)
+                    ((column+1)*CELL_HEIGHT)-20), xcolor)
     };
 
     sf::Vertex line2[] = 
     {
         sf::Vertex(sf::Vector2f(((row+1)*CELL_WIDTH)-80, 
-                    (column * CELL_HEIGHT)+20), sf::Color::Red),
+                    (column * CELL_HEIGHT)+20), xcolor),
         sf::Vertex(sf::Vector2f((row*CELL_WIDTH)+80, 
-                    ((column+1)*CELL_HEIGHT)-20), sf::Color::Red)
+                    ((column+1)*CELL_HEIGHT)-20), xcolor)
     };
 
     _window.draw(line1, 2, sf::Lines);
@@ -71,10 +96,20 @@ void Renderer::DrawX(int row, int column) {
 }
 
 void Renderer::DrawO(int row, int column) {
+    sf::Color ocolor = O_COLOR;
+    switch (Game::state) {
+        case Game::State::X_WON:
+            ocolor = X_COLOR;
+            break;
+        case Game::State::TIE:
+            ocolor = TIE_COLOR;
+            break;
+        default: {}
+    }
     sf::CircleShape circle((CELL_HEIGHT/2)-10);
     circle.setPosition((row*CELL_WIDTH)+(CELL_WIDTH/4), (column*CELL_HEIGHT)+10);
-    circle.setOutlineColor(sf::Color::Red);
-    circle.setFillColor(sf::Color::Black);
+    circle.setOutlineColor(ocolor);
+    circle.setFillColor(sf::Color::Transparent);
     circle.setOutlineThickness(1);
     _window.draw(circle);
 }

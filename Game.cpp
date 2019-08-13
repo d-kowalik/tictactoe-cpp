@@ -1,8 +1,9 @@
 #include "Game.hpp"
 
+Game::State Game::state = Game::State::RUNNING;
+
 Game::Game() : _board{{{EMPTY, EMPTY, EMPTY}, 
                     {EMPTY, EMPTY, EMPTY}, {EMPTY, EMPTY, EMPTY}}}, 
-                    state{State::RUNNING},
                     player(Cell::X) {}
 
 void Game::ClickOnCell(int x, int y) {
