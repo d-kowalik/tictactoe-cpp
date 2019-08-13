@@ -7,9 +7,20 @@ Game::Game() : _board{{{EMPTY, EMPTY, EMPTY},
                     player(Cell::X) {}
 
 void Game::ClickOnCell(int x, int y) {
-    if (state != State::RUNNING) return;
-    SetCell(player, x, y);
-    NextTurn();
+    if (state != State::RUNNING) {
+        ClearBoard();
+        state = State::RUNNING;
+    } else {
+        SetCell(player, x, y);
+        NextTurn();
+    }
+}
+
+void Game::ClearBoard() {
+    _board =  {{{EMPTY, EMPTY, EMPTY}, 
+                {EMPTY, EMPTY, EMPTY}, {EMPTY, EMPTY, EMPTY}}};
+    player = Cell::X;
+    moves = 0;
 }
 
 void Game::SetCell(Cell cell, int x, int y) {

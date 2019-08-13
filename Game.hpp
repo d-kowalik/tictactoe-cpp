@@ -22,6 +22,8 @@ private:
     std::array<std::array<int, 3>, 3> _board;
     Cell player;
     int moves = 0;
+    void ClearBoard();
+    void CheckWin();
 
 public:
     Game();
@@ -31,5 +33,4 @@ public:
     inline std::array<std::array<int, 3>, 3> GetBoard() const { return _board; }
     void SetCell(Cell cell, int x, int y);
     inline Cell GetPlayer() const { return player; }
-    void CheckWin();
 };
