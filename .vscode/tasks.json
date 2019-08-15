@@ -19,6 +19,8 @@
             "type": "shell",
             "command": "g++",
             "args": [
+                "-Wall",
+                "-Wextra",
                 "main.o",
                 "Renderer.o",
                 "Game.o",
