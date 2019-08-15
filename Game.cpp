@@ -19,7 +19,8 @@ void Game::ClickOnCell(int x, int y) {
 
 void Game::ClearBoard() {
     _board =  {{{EMPTY, EMPTY, EMPTY}, 
-                {EMPTY, EMPTY, EMPTY}, {EMPTY, EMPTY, EMPTY}}};
+                {EMPTY, EMPTY, EMPTY}, 
+                {EMPTY, EMPTY, EMPTY}}};
     player = Cell::X;
     moves = 0;
 }
@@ -27,29 +28,57 @@ void Game::ClearBoard() {
 void Game::SetCell(Cell cell, int x, int y) {
     _board[x][y] = cell;
     moves++;
+    _lastMove.x = x;
+    _lastMove.y = y;
+
     CheckWin();
+}
+
+void Game::ReportWin() {
+    if (player == Game::Cell::O) {
+        state = Game::State::O_WON;
+    } else {
+        state = Game::State::X_WON;
+    }
+}
+
+void Game::CheckColumns() {
+    for (int i = 0; i < 3; i++)
+        if (_board[_lastMove.x][i] != player) return;
+
+     ReportWin();
+}
+
+void Game::CheckRows() {
+    for (int i = 0; i < 3; i++)
+        if (_board[i][_lastMove.y] != player) return;
+    
+    ReportWin();
+}
+
+void Game::CheckDiag() {
+    if (_lastMove.x == _lastMove.y) {
+        for (int i = 0; i < 3; i++) 
+            if (_board[i][i] != player) return;
+        ReportWin();
+    }
+}
+
+void Game::CheckAntiDiag() {
+    if (_lastMove.x + _lastMove.y == 2) {
+        for (int i = 0; i < 3; i++)
+            if (_board[i][2-i] != player) return; 
+        ReportWin();
+    }
 }
 
 void Game::CheckWin() {
     if (moves < 5) return;
 
-    if ((_board[0][0] != EMPTY && _board[0][0] == _board[0][1] && _board[0][1] == _board[0][2])
-        || (_board[1][0] != EMPTY && _board[1][0] == _board[1][1] && _board[1][1] == _board[1][2])
-        || (_board[2][0] != EMPTY && _board[2][0] == _board[2][1] && _board[2][1] == _board[2][2])
-        || (_board[0][0] != EMPTY && _board[0][0] == _board[1][0] && _board[1][0] == _board[2][0])
-        || (_board[0][1] != EMPTY && _board[0][1] == _board[1][1] && _board[1][1] == _board[2][1])
-        || (_board[0][2] != EMPTY && _board[0][2] == _board[1][2] && _board[1][2] == _board[2][2])
-        || (_board[0][0] != EMPTY && _board[0][0] == _board[1][1] && _board[1][1] == _board[2][2])
-        || (_board[0][2] != EMPTY && _board[0][2] == _board[1][1] && _board[1][1] == _board[2][0])
-    ) {
-        if (player == Cell::X) {
-            state = State::X_WON;
-        } else if (player == Cell::O) {
-            state = State::O_WON;
-        }
-    } else if (moves == 9) {
-        state = State::TIE;
-    }
+    CheckColumns();
+    CheckRows();
+    CheckDiag();
+    CheckAntiDiag();
 }
 
 void Game::NextTurn() {

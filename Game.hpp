@@ -1,4 +1,5 @@
 #include <array>
+#include <SFML/Graphics.hpp>
 
 class Game {
 public:
@@ -21,9 +22,15 @@ public:
 private:
     std::array<std::array<int, 3>, 3> _board;
     Cell player;
+    sf::Vector2i _lastMove;
     int moves = 0;
     void ClearBoard();
     void CheckWin();
+    void CheckColumns();
+    void CheckRows();
+    void CheckDiag();
+    void CheckAntiDiag();
+    void ReportWin();
 
 public:
     Game();
