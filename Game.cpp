@@ -2,9 +2,9 @@
 
 Game::State Game::state = Game::State::RUNNING;
 
-Game::Game() : _board{{{EMPTY, EMPTY, EMPTY}, 
-                    {EMPTY, EMPTY, EMPTY}, {EMPTY, EMPTY, EMPTY}}}, 
-                    player(Cell::X) {}
+Game::Game() {
+    ClearBoard();
+}
 
 void Game::ClickOnCell(int x, int y) {
     if (state != State::RUNNING) {
