@@ -14,46 +14,55 @@ Game::~Game() {
     if (_ai != nullptr) delete _ai;
 }
 
+void Game::ClearBoard() {
+    _board =  {{{EMPTY, EMPTY, EMPTY}, 
+                {EMPTY, EMPTY, EMPTY}, 
+                {EMPTY, EMPTY, EMPTY}}};
+    _player = Cell::X;
+    _moves = 0;
+    _ai = new AI::Random();
+}
+
+void Game::NextTurn() {
+    if (_player == Cell::X) {
+        _player = Cell::O;
+    } else {
+        _player = Cell::X;
+    }
+}
+
 void Game::ClickOnCell(int x, int y) {
     if (state != State::RUNNING) {
         ClearBoard();
         state = State::RUNNING;
     } else {
         if (_board[x][y] != EMPTY) return;
-        SetCell(player, x, y);
+        SetCell(_player, x, y);
         NextTurn();
     }
 }
 
-void Game::ClearBoard() {
-    _board =  {{{EMPTY, EMPTY, EMPTY}, 
-                {EMPTY, EMPTY, EMPTY}, 
-                {EMPTY, EMPTY, EMPTY}}};
-    player = Cell::X;
-    moves = 0;
-    _ai = new AI::Random();
-}
-
 void Game::SetCell(Cell cell, int x, int y) {
     _board[x][y] = cell;
-    moves++;
+    _moves++;
     _lastMove.x = x;
     _lastMove.y = y;
 
     CheckWin();
 }
 
-void Game::ReportWin() {
-    if (player == Game::Cell::O) {
-        state = Game::State::O_WON;
-    } else {
-        state = Game::State::X_WON;
-    }
+void Game::CheckWin() {
+    if (_moves < 5) return;
+
+    CheckColumns();
+    CheckRows();
+    CheckDiag();
+    CheckAntiDiag();
 }
 
 void Game::CheckColumns() {
     for (int i = 0; i < 3; i++)
-        if (_board[_lastMove.x][i] != player) return;
+        if (_board[_lastMove.x][i] != _player) return;
 
     Game::firstCell.x = _lastMove.x;
     Game::firstCell.y = 0;
@@ -64,7 +73,7 @@ void Game::CheckColumns() {
 
 void Game::CheckRows() {
     for (int i = 0; i < 3; i++)
-        if (_board[i][_lastMove.y] != player) return;
+        if (_board[i][_lastMove.y] != _player) return;
     
     Game::firstCell.x = 0;
     Game::firstCell.y = _lastMove.y;
@@ -76,7 +85,7 @@ void Game::CheckRows() {
 void Game::CheckDiag() {
     if (_lastMove.x == _lastMove.y) {
         for (int i = 0; i < 3; i++) 
-            if (_board[i][i] != player) return;
+            if (_board[i][i] != _player) return;
 
         Game::firstCell.x = 0;
         Game::firstCell.y = 0;
@@ -89,7 +98,7 @@ void Game::CheckDiag() {
 void Game::CheckAntiDiag() {
     if (_lastMove.x + _lastMove.y == 2) {
         for (int i = 0; i < 3; i++)
-            if (_board[i][2-i] != player) return; 
+            if (_board[i][2-i] != _player) return; 
 
         Game::firstCell.x = 2;
         Game::firstCell.y = 0;
@@ -99,19 +108,10 @@ void Game::CheckAntiDiag() {
     }
 }
 
-void Game::CheckWin() {
-    if (moves < 5) return;
-
-    CheckColumns();
-    CheckRows();
-    CheckDiag();
-    CheckAntiDiag();
-}
-
-void Game::NextTurn() {
-    if (player == Cell::X) {
-        player = Cell::O;
+void Game::ReportWin() {
+    if (_player == Game::Cell::O) {
+        state = Game::State::O_WON;
     } else {
-        player = Cell::X;
+        state = Game::State::X_WON;
     }
 }

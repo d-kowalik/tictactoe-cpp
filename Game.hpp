@@ -27,12 +27,15 @@ public:
 
 private:
     std::array<std::array<int, 3>, 3> _board;
-    Cell player;
+    Cell _player;
     sf::Vector2i _lastMove;
-    int moves = 0;
+    int _moves = 0;
     AI::AI* _ai;
 
     void ClearBoard();
+    void NextTurn();
+    void SetCell(Cell cell, int x, int y);
+
     void CheckWin();
     void CheckColumns();
     void CheckRows();
@@ -45,8 +48,6 @@ public:
     ~Game();
 
     void ClickOnCell(int x, int y);
-    void NextTurn();
     inline std::array<std::array<int, 3>, 3> GetBoard() const { return _board; }
-    void SetCell(Cell cell, int x, int y);
-    inline Cell GetPlayer() const { return player; }
+    inline Cell GetPlayer() const { return _player; }
 };
