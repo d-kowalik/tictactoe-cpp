@@ -15,7 +15,8 @@
                 "main.cpp",
                 "Renderer.cpp",
                 "Game.cpp",
-                "ai/Random.cpp"
+                "ai/Random.cpp",
+                "ai/BlockEnemy.cpp"
             ]
         },
         {
@@ -27,6 +28,7 @@
                 "Renderer.o",
                 "Game.o",
                 "Random.o",
+                "BlockEnemy.o",
                 "-o",
                 "sfml-app.out",
                 "-lsfml-graphics",

@@ -1,6 +1,7 @@
 #include "Game.hpp"
 
 #include "ai/Random.hpp"
+#include "ai/BlockEnemy.hpp"
 
 Game::State Game::state = Game::State::RUNNING;
 sf::Vector2i Game::firstCell = sf::Vector2i{};
@@ -21,14 +22,14 @@ void Game::ClearBoard() {
     _player = Cell::O;
     _moves = 0;
     state = State::RUNNING;
-    _ai = new AI::Random();
+    _ai = new AI::BlockEnemy();
     NextTurn();
 }
 
 void Game::NextTurn() {
     if (state != State::RUNNING) return;
     _player = Cell::X;
-    auto aiMove = _ai->Play(_board);
+    auto aiMove = _ai->Play(_board, _lastMove);
     SetCell(Cell::X, aiMove.x, aiMove.y);
     _player = Cell::O;
 }
@@ -39,6 +40,8 @@ void Game::ClickOnCell(int x, int y) {
     } else {
         if (_board[x][y] != EMPTY) return;
         SetCell(_player, x, y);
+        _lastMove.x = x;
+        _lastMove.y = y;
         NextTurn();
     }
 }
@@ -46,8 +49,6 @@ void Game::ClickOnCell(int x, int y) {
 void Game::SetCell(Cell cell, int x, int y) {
     _board[x][y] = cell;
     _moves++;
-    _lastMove.x = x;
-    _lastMove.y = y;
 
     CheckWin();
 }
