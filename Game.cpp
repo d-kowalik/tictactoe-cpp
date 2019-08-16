@@ -29,7 +29,7 @@ void Game::ClearBoard() {
 void Game::NextTurn() {
     if (state != State::RUNNING) return;
     _player = Cell::X;
-    auto aiMove = _ai->Play(_board, _lastMove);
+    auto aiMove = _ai->Play(_board, _lastPlayerMove);
     SetCell(_player, aiMove.x, aiMove.y);
     _player = Cell::O;
 }
@@ -40,8 +40,8 @@ void Game::ClickOnCell(int x, int y) {
     } else {
         if (_board[x][y] != EMPTY) return;
         SetCell(_player, x, y);
-        _lastMove.x = x;
-        _lastMove.y = y;
+        _lastPlayerMove.x = x;
+        _lastPlayerMove.y = y;
         NextTurn();
     }
 }
@@ -49,6 +49,8 @@ void Game::ClickOnCell(int x, int y) {
 void Game::SetCell(Cell cell, int x, int y) {
     _board[x][y] = cell;
     _moves++;
+    _lastMove.x = x;
+    _lastMove.y = y;
 
     CheckWin();
 }

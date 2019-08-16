@@ -28,6 +28,7 @@ private:
     std::array<std::array<int, 3>, 3> _board;
     Cell _player;
     sf::Vector2i _lastMove;
+    sf::Vector2i _lastPlayerMove;
     int _moves = 0;
     AI::AI* _ai;
 
