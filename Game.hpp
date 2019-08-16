@@ -3,8 +3,7 @@
 #include <array>
 #include <SFML/Graphics.hpp>
 
-#include "ai/AI.hpp"
-
+namespace AI { class AI; };
 class Game {
 public:
     enum State {
