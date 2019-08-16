@@ -2,14 +2,11 @@
 
 #include <iostream>
 
-#include "../Game.hpp"
-
 namespace AI {
 
 
-
-sf::Vector2i BlockEnemy::Play(const Board& board, sf::Vector2i enemyMove) {
-    auto enemySymbol = board[enemyMove.x][enemyMove.y];
+sf::Vector2i BlockEnemy::FindBlockingMove(const Board& board, 
+                sf::Vector2i enemyMove, Game::Cell enemySymbol) {
     std::vector<sf::Vector2i> possibleMoves{};
 
     int emptyCount = 0;
@@ -67,10 +64,20 @@ sf::Vector2i BlockEnemy::Play(const Board& board, sf::Vector2i enemyMove) {
     if (emptyCount == 1 && enemyCount == 2) possibleMoves.push_back(empty);
 
     if (possibleMoves.size() == 0) {
+        return {-1, -1};
+    } else {
+        return possibleMoves[0];
+    }
+} 
+
+
+sf::Vector2i BlockEnemy::Play(const Board& board, sf::Vector2i enemyMove) {
+    auto enemySymbol = board[enemyMove.x][enemyMove.y];
+    auto blockingMove = FindBlockingMove(board, enemyMove, static_cast<Game::Cell>(enemySymbol)); 
+    if (blockingMove.x == -1) {
         return Super::Play(board, enemyMove);
     }
-
-    return possibleMoves[0];
+    return blockingMove;
 }
 
 
