@@ -3,6 +3,8 @@
 #include <array>
 #include <SFML/Graphics.hpp>
 
+#include "ai/AI.hpp"
+
 class Game {
 public:
     enum State {
@@ -28,6 +30,8 @@ private:
     Cell player;
     sf::Vector2i _lastMove;
     int moves = 0;
+    AI::AI* _ai;
+
     void ClearBoard();
     void CheckWin();
     void CheckColumns();
@@ -38,6 +42,7 @@ private:
 
 public:
     Game();
+    ~Game();
 
     void ClickOnCell(int x, int y);
     void NextTurn();

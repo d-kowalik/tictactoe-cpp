@@ -1,11 +1,17 @@
 #include "Game.hpp"
 
+#include "ai/Random.hpp"
+
 Game::State Game::state = Game::State::RUNNING;
 sf::Vector2i Game::firstCell = sf::Vector2i{};
 sf::Vector2i Game::lastCell = sf::Vector2i{};
 
 Game::Game() {
     ClearBoard();
+}
+
+Game::~Game() {
+    if (_ai != nullptr) delete _ai;
 }
 
 void Game::ClickOnCell(int x, int y) {
@@ -25,6 +31,7 @@ void Game::ClearBoard() {
                 {EMPTY, EMPTY, EMPTY}}};
     player = Cell::X;
     moves = 0;
+    _ai = new AI::Random();
 }
 
 void Game::SetCell(Cell cell, int x, int y) {
