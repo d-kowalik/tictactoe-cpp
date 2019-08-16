@@ -24,7 +24,8 @@ void Game::ClearBoard() {
     _moves = 0;
     state = State::RUNNING;
     _ai = new AI::FindWinning();
-    NextTurn();
+    if (!_playerFirst) NextTurn();
+    _playerFirst = !_playerFirst;
 }
 
 void Game::NextTurn() {

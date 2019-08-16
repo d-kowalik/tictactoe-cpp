@@ -31,6 +31,7 @@ private:
     sf::Vector2i _lastPlayerMove;
     int _moves = 0;
     AI::AI* _ai;
+    bool _playerFirst = false;
 
     void ClearBoard();
     void NextTurn();
