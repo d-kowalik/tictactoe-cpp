@@ -30,7 +30,7 @@ void Game::NextTurn() {
     if (state != State::RUNNING) return;
     _player = Cell::X;
     auto aiMove = _ai->Play(_board, _lastMove);
-    SetCell(Cell::X, aiMove.x, aiMove.y);
+    SetCell(_player, aiMove.x, aiMove.y);
     _player = Cell::O;
 }
 
@@ -60,6 +60,8 @@ void Game::CheckWin() {
     CheckRows();
     CheckDiag();
     CheckAntiDiag();
+
+    if (state == State::RUNNING && _moves == 9) state=State::TIE;
 }
 
 void Game::CheckColumns() {
