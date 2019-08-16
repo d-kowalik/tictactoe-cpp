@@ -11,7 +11,6 @@ namespace AI {
 sf::Vector2i BlockEnemy::Play(const Board& board, sf::Vector2i enemyMove) {
     auto enemySymbol = board[enemyMove.x][enemyMove.y];
     std::vector<sf::Vector2i> possibleMoves{};
-    std::cout << "Enemy move: (" << enemyMove.x << ", " << enemyMove.y << ")\n"; 
 
     int emptyCount = 0;
     int enemyCount = 0;
