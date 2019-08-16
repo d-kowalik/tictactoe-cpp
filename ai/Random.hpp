@@ -6,7 +6,7 @@ namespace AI {
 
 class Random : public AI {
 public:
-    sf::Vector2i Play(const Board& board) override;
+    sf::Vector2i Play(const Board& board, sf::Vector2i enemyMove) override;
 };
 
 };

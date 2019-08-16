@@ -10,7 +10,7 @@
 
 namespace AI {
 
-sf::Vector2i Random::Play(const Board& board) {
+sf::Vector2i Random::Play(const Board& board, sf::Vector2i enemyMove) {
     std::vector<sf::Vector2i> possibleMoves{};
     for (int x = 0; x < board.size(); x++) {
         for (int y = 0; y < board.size(); y++) {
