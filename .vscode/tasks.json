@@ -12,11 +12,11 @@
                 "-c",
                 "-Wall",
                 "-Wextra",
-                "main.cpp",
-                "Renderer.cpp",
-                "Game.cpp",
-                "ai/Random.cpp",
-                "ai/BlockEnemy.cpp"
+                "src/main.cpp",
+                "src/Renderer.cpp",
+                "src/Game.cpp",
+                "src/ai/Random.cpp",
+                "src/ai/BlockEnemy.cpp"
             ]
         },
         {
