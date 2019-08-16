@@ -28,6 +28,7 @@ void Renderer::Render(std::array<std::array<int, 3>, 3> board) {
 }
 
 void Renderer::DrawWinLine() {
+    if (Game::state == Game::State::TIE) return;
     sf::Vertex line[] = 
     {
         sf::Vertex(sf::Vector2f(
