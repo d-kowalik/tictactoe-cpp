@@ -20,6 +20,8 @@ public:
     };
 
     static State state;
+    static sf::Vector2i firstCell;
+    static sf::Vector2i lastCell;
 
 private:
     std::array<std::array<int, 3>, 3> _board;

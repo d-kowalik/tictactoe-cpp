@@ -21,7 +21,23 @@ void Renderer::Render(std::array<std::array<int, 3>, 3> board) {
             }
         }
     }
+    if (Game::state != Game::State::RUNNING) {
+        DrawWinLine();
+    }
     _window.display();
+}
+
+void Renderer::DrawWinLine() {
+    sf::Vertex line[] = 
+    {
+        sf::Vertex(sf::Vector2f(
+            Game::firstCell.x * CELL_WIDTH + (CELL_WIDTH/2), 
+            Game::firstCell.y * CELL_HEIGHT + (CELL_HEIGHT/2)), X_COLOR),
+        sf::Vertex(sf::Vector2f(
+            Game::lastCell.x * CELL_WIDTH + (CELL_WIDTH/2), 
+            Game::lastCell.y * CELL_HEIGHT + (CELL_HEIGHT/2)), O_COLOR)
+    };
+    _window.draw(line, 2, sf::Lines);
 }
 
 void Renderer::DrawGrid() {

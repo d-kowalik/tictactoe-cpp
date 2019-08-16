@@ -1,6 +1,8 @@
 #include "Game.hpp"
 
 Game::State Game::state = Game::State::RUNNING;
+sf::Vector2i Game::firstCell = sf::Vector2i{};
+sf::Vector2i Game::lastCell = sf::Vector2i{};
 
 Game::Game() {
     ClearBoard();
@@ -46,13 +48,21 @@ void Game::CheckColumns() {
     for (int i = 0; i < 3; i++)
         if (_board[_lastMove.x][i] != player) return;
 
-     ReportWin();
+    Game::firstCell.x = _lastMove.x;
+    Game::firstCell.y = 0;
+    Game::lastCell.x = _lastMove.x;
+    Game::lastCell.y = 2;
+    ReportWin();
 }
 
 void Game::CheckRows() {
     for (int i = 0; i < 3; i++)
         if (_board[i][_lastMove.y] != player) return;
     
+    Game::firstCell.x = 0;
+    Game::firstCell.y = _lastMove.y;
+    Game::lastCell.x = 2;
+    Game::lastCell.y = _lastMove.y;
     ReportWin();
 }
 
@@ -60,6 +70,11 @@ void Game::CheckDiag() {
     if (_lastMove.x == _lastMove.y) {
         for (int i = 0; i < 3; i++) 
             if (_board[i][i] != player) return;
+
+        Game::firstCell.x = 0;
+        Game::firstCell.y = 0;
+        Game::lastCell.x = 2;
+        Game::lastCell.y = 2;
         ReportWin();
     }
 }
@@ -68,6 +83,11 @@ void Game::CheckAntiDiag() {
     if (_lastMove.x + _lastMove.y == 2) {
         for (int i = 0; i < 3; i++)
             if (_board[i][2-i] != player) return; 
+
+        Game::firstCell.x = 2;
+        Game::firstCell.y = 0;
+        Game::lastCell.x = 0;
+        Game::lastCell.y = 2;
         ReportWin();
     }
 }

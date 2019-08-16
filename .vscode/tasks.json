@@ -9,6 +9,8 @@
             "command": "g++",
             "args": [
                 "-c",
+                "-Wall",
+                "-Wextra",
                 "main.cpp",
                 "Renderer.cpp",
                 "Game.cpp"
@@ -19,8 +21,6 @@
             "type": "shell",
             "command": "g++",
             "args": [
-                "-Wall",
-                "-Wextra",
                 "main.o",
                 "Renderer.o",
                 "Game.o",
