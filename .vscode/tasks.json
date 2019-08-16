@@ -8,12 +8,14 @@
             "type": "shell",
             "command": "g++",
             "args": [
+                "-std=c++17",
                 "-c",
                 "-Wall",
                 "-Wextra",
                 "main.cpp",
                 "Renderer.cpp",
-                "Game.cpp"
+                "Game.cpp",
+                "ai/Random.cpp"
             ]
         },
         {
@@ -24,6 +26,7 @@
                 "main.o",
                 "Renderer.o",
                 "Game.o",
+                "Random.o",
                 "-o",
                 "sfml-app.out",
                 "-lsfml-graphics",

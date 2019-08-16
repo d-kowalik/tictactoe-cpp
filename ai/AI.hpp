@@ -2,6 +2,8 @@
 
 #include <array>
 
+#include <SFML/Graphics/Vertex.hpp>
+
 namespace AI {
 class AI {
 protected:

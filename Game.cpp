@@ -18,23 +18,24 @@ void Game::ClearBoard() {
     _board =  {{{EMPTY, EMPTY, EMPTY}, 
                 {EMPTY, EMPTY, EMPTY}, 
                 {EMPTY, EMPTY, EMPTY}}};
-    _player = Cell::X;
+    _player = Cell::O;
     _moves = 0;
+    state = State::RUNNING;
     _ai = new AI::Random();
+    NextTurn();
 }
 
 void Game::NextTurn() {
-    if (_player == Cell::X) {
-        _player = Cell::O;
-    } else {
-        _player = Cell::X;
-    }
+    if (state != State::RUNNING) return;
+    _player = Cell::X;
+    auto aiMove = _ai->Play(_board);
+    SetCell(Cell::X, aiMove.x, aiMove.y);
+    _player = Cell::O;
 }
 
 void Game::ClickOnCell(int x, int y) {
     if (state != State::RUNNING) {
         ClearBoard();
-        state = State::RUNNING;
     } else {
         if (_board[x][y] != EMPTY) return;
         SetCell(_player, x, y);
