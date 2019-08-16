@@ -2,6 +2,7 @@
 
 #include "ai/Random.hpp"
 #include "ai/BlockEnemy.hpp"
+#include "ai/FindWinning.hpp"
 
 Game::State Game::state = Game::State::RUNNING;
 sf::Vector2i Game::firstCell = sf::Vector2i{};
@@ -22,7 +23,7 @@ void Game::ClearBoard() {
     _player = Cell::O;
     _moves = 0;
     state = State::RUNNING;
-    _ai = new AI::BlockEnemy();
+    _ai = new AI::FindWinning();
     NextTurn();
 }
 

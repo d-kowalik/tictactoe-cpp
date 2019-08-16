@@ -16,7 +16,8 @@
                 "src/Renderer.cpp",
                 "src/Game.cpp",
                 "src/ai/Random.cpp",
-                "src/ai/BlockEnemy.cpp"
+                "src/ai/BlockEnemy.cpp",
+                "src/ai/FindWinning.cpp"
             ]
         },
         {
@@ -29,6 +30,7 @@
                 "Game.o",
                 "Random.o",
                 "BlockEnemy.o",
+                "FindWinning.o",
                 "-o",
                 "sfml-app.out",
                 "-lsfml-graphics",
